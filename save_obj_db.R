@@ -23,6 +23,7 @@ get_object_info <- function(object){
 
     list(name = as.character(object),
          class = class(obj),
+         size_mb = capture.output(object.size(obj)),
          str = capture.output(str(obj)),
          length = ifelse(length(grep(x = class(obj), pattern = "data\\.frame|data\\.table|tibble")), nrow(obj), length(obj)),
          n_colums = ifelse(length(grep(x = class(obj), pattern = "data\\.frame|data\\.table|tibble")), ncol(obj), NA)
