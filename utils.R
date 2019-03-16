@@ -8,7 +8,7 @@ db_connect_old <- function(db_drv = RSQLite::SQLite(), db_name = "r_object_db.sq
 
 db_connect <- function(db_drv = RSQLite::SQLite(), db_name = "r_object_db.sqlite"){
 
-  dbConnect(drv = db_drv, name = db_name)
+  RSQLite::dbConnect(drv = db_drv, name = db_name)
 
 } # Not working
 

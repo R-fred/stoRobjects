@@ -40,7 +40,18 @@
 
 #### Test - part 1 ####
 
-# Using DBI::dbConnect directly
+# Using DBI::dbConnect directly - name: con_2
+con_2 <- DBI::dbConnect(drv = RSQLite::SQLite(), name = "r_object_db.sqlite")
+DBI::dbIsValid(con_2)
+DBI::dbListTables(con_2)
+
+lst_obj_db_DBI <- DBI::dbGetQuery(cn_db_DBI, "SELECT * FROM objects;")
+print(lst_obj_db_DBI)
+
+DBI::dbDisconnect(con_2)
+rm(con_2)
+
+# Using DBI::dbConnect directly - name: cn_db_DBI
 cn_db_DBI <- DBI::dbConnect(drv = RSQLite::SQLite(), name = "Apps/R/stoRobjects/stoRobjects/r_object_db.sqlite")
 DBI::dbIsValid(cn_db_DBI)
 DBI::dbListTables(cn_db_DBI)
@@ -49,10 +60,11 @@ lst_obj_db_DBI <- DBI::dbGetQuery(cn_db_DBI, "SELECT * FROM objects;")
 print(lst_obj_db_DBI)
 
 DBI::dbDisconnect(cn_db_DBI)
-rm(cn_db_DBI)
 
 # Using RSQLite::dbConnect directly
-cn_db_RSQLite <- RSQLite::dbConnect(drv = RSQLite::SQLite(), name = "Apps/R/stoRobjects/stoRobjects/r_object_db.sqlite")
+cn_db_RSQLite <- RSQLite::dbConnect(drv = RSQLite::SQLite(),
+                                    name = "Apps/R/stoRobjects/stoRobjects/r_object_db.sqlite",
+                                    flags = "SQLITE_RW")
 DBI::dbIsValid(cn_db_RSQLite)
 DBI::dbListTables(cn_db_RSQLite)
 
